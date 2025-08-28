@@ -1,0 +1,27 @@
+name: "AI PR Review"
+description: "Post an AI code review comment on pull requests using OpenAI"
+author: "Tom Stirrop-Metcalfe"
+branding:
+  icon: "message-square"
+  color: "blue"
+
+inputs:
+  openai_api_key:
+    description: "OpenAI API key"
+    required: true
+  model:
+    description: "OpenAI model id"
+    required: false
+    default: "gpt-4.1-mini"
+  max_chars:
+    description: "Approx max characters of patch to send"
+    required: false
+    default: "120000"
+  category_style:
+    description: "Review style: default|strict"
+    required: false
+    default: "default"
+
+runs:
+  using: node20
+  main: dist/index.js
