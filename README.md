@@ -32,7 +32,7 @@ jobs:
               with:
                 fetch-depth: 0
             - name: AI review
-              uses: iamtommetcalfe/ai-pr-review-action@v1
+              uses: iamtommetcalfe/openai-pr-review-action@v1
               env:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
