@@ -1,4 +1,4 @@
-name: "AI PR Review"
+name: "OpenAI PR Reviewer"
 description: "Post an AI code review comment on pull requests using OpenAI"
 author: "Tom Stirrop-Metcalfe"
 branding:

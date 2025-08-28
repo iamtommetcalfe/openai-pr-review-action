@@ -14,7 +14,7 @@ Feedback is categorised for clarity:
 
 ```yaml
 # .github/workflows/ai-pr-review.yml
-name: AI PR review
+name: OpenAI PR review
 
 on:
     pull_request:
@@ -33,6 +33,8 @@ jobs:
                 fetch-depth: 0
             - name: AI review
               uses: your-org/ai-pr-review-action@v1
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                 openai_api_key: ${{ secrets.OPENAI_API_KEY }}
                 model: gpt-4.1-mini

@@ -7,7 +7,6 @@ pnpm-debug.log*
 package-lock.json*
 
 # Build output
-dist/
 *.tsbuildinfo
 
 # Environment
