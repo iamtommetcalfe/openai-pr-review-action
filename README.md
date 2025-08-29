@@ -56,3 +56,11 @@ jobs:
 - `model` (default `gpt-4.1-mini`)
 - `max_chars` (default `120000`)
 - `category_style` (default `default`)
+
+## Node.js support
+
+This action targets Node.js 20.
+- GitHub Actions runtime: node20 (see action.yml)
+- package.json engines: ^20.0.0
+
+If you use a self-hosted runner, ensure Node 20 is available on the runner.

@@ -1,38 +1,33 @@
 ---
 name: Bug report
-about: Create a report to help us improve
-title: ''
-labels: ''
+about: Create a report to help us improve the OpenAI PR Reviewer action
+title: "[Bug]: "
+labels: bug
 assignees: ''
-
 ---
 
-**Describe the bug**
+## Describe the bug
 A clear and concise description of what the bug is.
 
-**To Reproduce**
+## To Reproduce
 Steps to reproduce the behavior:
 1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+2. Run workflow '...'
+3. See error '...'
 
-**Expected behavior**
+## Expected behavior
 A clear and concise description of what you expected to happen.
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+## Logs / Screenshots
+- Relevant workflow run URL(s):
+- Error messages and stack traces:
+- Screenshots (if applicable):
 
-**Desktop (please complete the following information):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+## Environment
+- Action version (tag/commit):
+- Runner OS (e.g., ubuntu-latest):
+- Node version (if self-hosted):
+- OpenAI model used (input `model`):
 
-**Smartphone (please complete the following information):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
-
-**Additional context**
+## Additional context
 Add any other context about the problem here.
