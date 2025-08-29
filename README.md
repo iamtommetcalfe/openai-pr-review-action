@@ -52,10 +52,30 @@ jobs:
 - Logs are kept clean — diff content is not printed.
 
 ## Inputs
-- `openai_api_key` (required)
+- `openai_api_key` (required unless `dry_run: true`)
 - `model` (default `gpt-4.1-mini`)
 - `max_chars` (default `120000`)
 - `category_style` (default `default`)
+- `dry_run` (default `false`) — if true, the action will not call OpenAI or post a comment; it will expose a `review_body` output for preview.
+- `pr_number` (optional) — use for manual runs via `workflow_dispatch`.
+
+## Test the action without side effects (dry run)
+
+- From GitHub CLI after committing the workflow:
+  - Trigger: `gh workflow run "AI PR Review (Dry Run)" -f pr_number=123`
+  - Then view logs: `gh run watch --exit-status && gh run view --log`
+  - The job prints a preview of `steps.review.outputs.review_body`.
+
+- Locally with act (example):
+  - Create a file `.act-dryrun.json`:
+    ```json
+    { "inputs": { "pr_number": "123", "model": "gpt-4.1-mini", "max_chars": "120000", "category_style": "default" } }
+    ```
+  - Run: `act workflow_dispatch -W .github/workflows/action-dry-run.yml -e .act-dryrun.json`
+
+Notes:
+- The dry-run flow requires only `GITHUB_TOKEN`; `openai_api_key` is not needed.
+- For normal PR reviews (non-dry), provide `OPENAI_API_KEY` as shown above.
 
 ## Node.js support
 

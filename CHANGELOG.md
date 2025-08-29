@@ -6,7 +6,13 @@ The format is based on Keep a Changelog, and this project adheres to Semantic Ve
 
 ## [Unreleased]
 ### Added
+
+## [1.0.2] - 2025-08-29
+### Added
 - GitHub Actions CI workflow to run tests (Node 20) on push and pull requests.
+- Dry-run mode (`dry_run` input) and `review_body` output to preview the review without calling OpenAI or posting.
+- `pr_number` input to target PRs during manual runs (workflow_dispatch).
+- New workflow: "AI PR Review (Dry Run)" to test via GitHub CLI or locally with `act`.
 
 ## [1.0.1] - 2025-08-29
 ### Added

@@ -27,7 +27,35 @@ Key environment/inputs:
 - Optional inputs: `model`, `max_chars`, `category_style`
 
 ## Testing
-At the moment there is no formal test suite. Planned improvements include unit and integration tests (see `docs/tasks.md`). If you add tests, prefer Jest or Vitest and keep them deterministic by mocking network calls.
+- Unit tests use Vitest. Run:
+  ```bash
+  npm test
+  ```
+- The repository includes a CI workflow to run tests on push/PR.
+
+## Dry-run the Action (no OpenAI calls, no comments)
+Use the provided workflow to preview the generated review body safely:
+
+- Trigger via GitHub CLI (after pushing the workflow):
+  ```bash
+  gh workflow run "AI PR Review (Dry Run)" -f pr_number=123
+  gh run watch --exit-status && gh run view --log
+  ```
+  The job prints a truncated preview of `steps.review.outputs.review_body`.
+
+- Trigger locally with act:
+  1. Create `.act-dryrun.json`:
+     ```json
+     { "inputs": { "pr_number": "123", "model": "gpt-4.1-mini", "max_chars": "120000", "category_style": "default" } }
+     ```
+  2. Execute:
+     ```bash
+     act workflow_dispatch -W .github/workflows/action-dry-run.yml -e .act-dryrun.json
+     ```
+
+Notes:
+- Dry run requires only `GITHUB_TOKEN`.
+- For normal runs (non-dry), provide `OPENAI_API_KEY`.
 
 ## Coding Guidelines
 - Node 20 features are allowed; keep compatibility with the specified engines in `package.json`.

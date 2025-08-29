@@ -8,7 +8,7 @@ branding:
 inputs:
   openai_api_key:
     description: "OpenAI API key"
-    required: true
+    required: false
   model:
     description: "OpenAI model id"
     required: false
@@ -21,6 +21,17 @@ inputs:
     description: "Review style: default|strict"
     required: false
     default: "default"
+  dry_run:
+    description: "If true, skip OpenAI and posting comment; output preview instead"
+    required: false
+    default: "false"
+  pr_number:
+    description: "PR number to operate on (for workflow_dispatch/manual runs)"
+    required: false
+
+outputs:
+  review_body:
+    description: "The generated review body (preview in dry_run)"
 
 runs:
   using: node20

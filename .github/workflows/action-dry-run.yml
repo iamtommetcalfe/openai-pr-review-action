@@ -1,0 +1,51 @@
+name: AI PR Review (Dry Run)
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: PR number to preview (required)
+        required: true
+      model:
+        description: OpenAI model id
+        required: false
+        default: gpt-4.1-mini
+      max_chars:
+        description: Approx max characters of patch to send
+        required: false
+        default: "120000"
+      category_style:
+        description: "Review style: default|strict"
+        required: false
+        default: default
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  dry-run:
+    name: Dry-run AI review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run action in dry-run mode
+        id: review
+        uses: ./
+        with:
+          dry_run: 'true'
+          pr_number: ${{ inputs.pr_number }}
+          model: ${{ inputs.model }}
+          max_chars: ${{ inputs.max_chars }}
+          category_style: ${{ inputs.category_style }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print review preview
+        run: |
+          echo "---- Dry-run review body (truncated) ----"
+          echo "${{ steps.review.outputs.review_body }}" | head -c 6000
