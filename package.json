@@ -1,23 +1,27 @@
 {
   "name": "openai-pr-review-action",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "type": "module",
   "license": "MIT",
   "main": "index.js",
   "engines": {
-    "node": "^20.0.0"
+  "node": "^20.0.0"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/github": "^6.0.0",
-    "openai": "^4.57.0"
+  "@actions/core": "^1.11.1",
+  "@actions/github": "^6.0.0",
+  "openai": "^4.57.0"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.38.3",
-    "vitest": "^2.1.1"
+  "@vercel/ncc": "^0.38.3",
+  "vitest": "^2.1.1"
   },
   "scripts": {
-    "build": "ncc build index.js -o dist",
-    "test": "vitest run"
+  "build": "ncc build index.js -o dist",
+  "build:debug": "ncc build index.js -o dist --source-map --source-map-register",
+  "test": "vitest run",
+  "preversion": "npm run build",
+  "prepublishOnly": "npm run build",
+  "release:prepare": "npm ci && npm run build"
   }
 }

@@ -52,12 +52,15 @@ jobs:
 - Logs are kept clean — diff content is not printed.
 
 ## Inputs
-- `openai_api_key` (required unless `dry_run: true`)
-- `model` (default `gpt-4.1-mini`)
-- `max_chars` (default `120000`)
-- `category_style` (default `default`)
-- `dry_run` (default `false`) — if true, the action will not call OpenAI or post a comment; it will expose a `review_body` output for preview.
-- `pr_number` (optional) — use for manual runs via `workflow_dispatch`.
+- `openai_api_key` — OpenAI API key. If not provided, the action falls back to `OPENAI_API_KEY` environment variable. Required when `dry_run` is `false`.
+- `model` — default `gpt-4.1-mini`. Allowed: `gpt-4.1-mini`, `gpt-4.1`, `gpt-4o-mini`, `gpt-4o`.
+- `max_chars` — default `120000`. Bounded to `[10000, 300000]` to prevent extreme payloads.
+- `category_style` — default `default`. Allowed: `default`, `strict`.
+- `include_globs` — optional, comma-separated glob patterns to include (e.g., `**/*.js,**/*.ts`).
+- `exclude_globs` — optional, comma-separated glob patterns to exclude; takes precedence over `include_globs`.
+- `posting_mode` — where to post the result. One of: `comment` (default), `review`, `pr_description`.
+- `dry_run` — default `false`. If true, the action will not call OpenAI or post; it will expose a `review_body` output for preview.
+- `pr_number` — optional; use for manual runs via `workflow_dispatch`.
 
 ## Test the action without side effects (dry run)
 
@@ -84,3 +87,19 @@ This action targets Node.js 20.
 - package.json engines: ^20.0.0
 
 If you use a self-hosted runner, ensure Node 20 is available on the runner.
+
+## Build & distribution (for contributors)
+
+This Action is bundled with @vercel/ncc and the built files are committed to dist/ (action.yml points to dist/index.js).
+
+Commands:
+- npm run build — builds without source maps (default, what CI verifies)
+- npm run build:debug — builds with inline source maps and register hook for local debugging
+
+Consistency:
+- A CI workflow verifies that rebuilding produces no changes under dist/.
+- Publishing/tagging runs a build via npm preversion and prepublishOnly to ensure dist is current.
+
+Notes on source maps:
+- Default builds exclude source maps to avoid bundling extra files and to keep diffs stable.
+- Use build:debug locally if you need stack traces mapped to sources.

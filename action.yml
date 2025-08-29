@@ -21,6 +21,16 @@ inputs:
     description: "Review style: default|strict"
     required: false
     default: "default"
+  include_globs:
+    description: "Comma-separated glob patterns to include (e.g., **/*.js,**/*.ts)"
+    required: false
+  exclude_globs:
+    description: "Comma-separated glob patterns to exclude (takes precedence over include)"
+    required: false
+  posting_mode:
+    description: "Where to post the result: comment|review|pr_description"
+    required: false
+    default: "comment"
   dry_run:
     description: "If true, skip OpenAI and posting comment; output preview instead"
     required: false
