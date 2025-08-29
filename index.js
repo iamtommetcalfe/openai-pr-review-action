@@ -29,7 +29,7 @@ Output format with emojis:
 
 Rules:
 - Be concise and actionable.
-- Use bullet points per category.
+- Use bullet points for the content of each category but not for the category title.
 - If no items in a category, write "None".
 - Include code blocks only when they clarify a fix.
 `;
